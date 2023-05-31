@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import './App.css';
-import IngredientItem from "./components/Ingredients/IngredientItem";
 import {Ingredient} from "./types";
+import Ingredients from "./components/Ingredients/Ingredients";
+import Burger from "./components/Burger/Burger";
 
-interface IStateIngredients{
+
+export interface IStateIngredients{
     name:string;
     count:number;
 }
 
 function App() {
     const [ingredients, setIngredients] = useState<IStateIngredients[]>([
-        {name: 'Meat', count: 0},
+        {name: 'Meat', count: 10},
         {name: 'Cheese', count: 0},
         {name: 'Salad', count: 0},
         {name: 'Bacon', count: 0},
@@ -24,7 +26,6 @@ function App() {
     ];
 
     const addIngredient = (index:number)=>{
-        console.log(ingredients[index]);
         const ingredientsCopy = [...ingredients];
         const ingredientsElement = {...ingredientsCopy[index]};
         ingredientsElement.count+= 1;
@@ -33,19 +34,26 @@ function App() {
         setIngredients(ingredientsCopy);
     }
 
-  return (
-    <div className="App">
-        {ingredientsList.map((ingredientItem,index)=>
-            <IngredientItem
-                name={ingredientItem.name}
-                image={ingredientItem.image}
-                key={index}
-                count={ingredients[index].count}
-                addIngredient ={()=> {addIngredient(index)}}
-            />
-        )}
-    </div>
-  );
+    const deleteIngredient = (index:number)=>{
+        const ingredientsCopy = [...ingredients];
+        const ingredientsElement = {...ingredientsCopy[index]};
+        ingredientsElement.count = 0 ;
+        ingredientsCopy[index] = ingredientsElement;
+
+        setIngredients(ingredientsCopy);
+    }
+
+    return (
+        <div className="App">
+            <Ingredients
+                ingredientsList={ingredientsList}
+                ingredients={ingredients}
+                deleteIngredient={deleteIngredient}
+                addIngredient={addIngredient}/>
+            <Burger ingredients={ingredients}/>
+        </div>
+    );
 }
 
 export default App;
+

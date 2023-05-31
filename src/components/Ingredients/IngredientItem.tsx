@@ -6,17 +6,17 @@ interface IProps{
     image:string;
     count:number;
     addIngredient:React.MouseEventHandler<HTMLImageElement>;
+    deleteIngredient:React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const IngredientItem:React.FC<IProps> =
-    ({name, image,count,addIngredient}) => {
+const IngredientItem:React.FC<IProps> = (props) => {
     return (
         <div className='ingredient'>
-            <img onClick={addIngredient} className='ingredient-img' src={image} alt={name}/>
-            <h2 className='ingredient-title'>{name} </h2>
-            <span className='ingredient-count'>x{count}</span>
-            <button className="ingredient-btn">
-                <img className='ingredient-btn' src="https://cdn4.iconfinder.com/data/icons/essentials-71/24/013_-_Trash-128.png" alt="delete"/>
+            <img onClick={props.addIngredient} className='ingredient-img' src={props.image} alt={props.name}/>
+            <h2 className='ingredient-title'>{props.name} </h2>
+            <span className='ingredient-count'>x{props.count}</span>
+            <button onClick={props.deleteIngredient} className="ingredient-btn">
+                <img className='ingredient-btn-img' src="https://cdn4.iconfinder.com/data/icons/essentials-71/24/013_-_Trash-128.png" alt="delete"/>
             </button>
         </div>
     );
