@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import './App.css';
-import {Ingredient} from "./types";
 import Ingredients from "./components/Ingredients/Ingredients";
 import Burger from "./components/Burger/Burger";
-
+import {Ingredient} from "./types";
+import './App.css';
 
 export interface IStateIngredients{
     name:string;
@@ -12,7 +11,7 @@ export interface IStateIngredients{
 
 function App() {
     const [ingredients, setIngredients] = useState<IStateIngredients[]>([
-        {name: 'Meat', count: 10},
+        {name: 'Meat', count: 0},
         {name: 'Cheese', count: 0},
         {name: 'Salad', count: 0},
         {name: 'Bacon', count: 0},
@@ -32,7 +31,7 @@ function App() {
         ingredientsCopy[index] = ingredientsElement;
 
         setIngredients(ingredientsCopy);
-    }
+    };
 
     const deleteIngredient = (index:number)=>{
         const ingredientsCopy = [...ingredients];
@@ -41,7 +40,7 @@ function App() {
         ingredientsCopy[index] = ingredientsElement;
 
         setIngredients(ingredientsCopy);
-    }
+    };
 
     return (
         <div className="App">
@@ -50,7 +49,7 @@ function App() {
                 ingredients={ingredients}
                 deleteIngredient={deleteIngredient}
                 addIngredient={addIngredient}/>
-            <Burger ingredients={ingredients}/>
+            <Burger ingredients={ingredients}></Burger>
         </div>
     );
 }

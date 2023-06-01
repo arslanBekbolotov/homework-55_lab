@@ -1,5 +1,5 @@
 import React from 'react';
-import './Ingredients.css'
+import './Ingredients.css';
 
 interface IProps{
     name:string;
